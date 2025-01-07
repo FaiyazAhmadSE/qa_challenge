@@ -22,8 +22,9 @@ test('TestCase #2', async ({ page }) => {
     await page.locator('text=Top Box Office').click()
     await page.getByRole('link', { name: '2.', exact:false }).click()
     await page.getByRole('link', { name: 'View User Ratings' }).click()
-    await page.waitForTimeout(1000)
-    await page.getByTestId('rating-button__user-rating__unrated').click()
+    const button = await page.locator('.sc-db4c4850-5')
+    await button.waitFor({ state: 'attached' })
+    await button.click()
     await page.locator('.ipc-starbar__rating__button[aria-label="Rate 5"]').click({force:true})
     await page.getByRole('button', { name: 'Rate', exact: true }).click()  
     //await page.locator('.ipc-rating-prompt__rate-button').click() => Not implemented because asking for login
